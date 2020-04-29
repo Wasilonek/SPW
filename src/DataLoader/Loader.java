@@ -6,6 +6,17 @@ import java.io.File;
 import java.util.*;
 
 public class Loader {
+    private List<Node> listOfNodes;
+    private List<Element> listOfElements;
+
+    public List<Node> getListOfNodes() {
+        return listOfNodes;
+    }
+
+    public List<Element> getListOfElements() {
+        return listOfElements;
+    }
+
     public String getFileName() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File("./src/FilesWithData"));
@@ -19,8 +30,8 @@ public class Loader {
     }
 
     public void loadDataFromFile(String filePath) throws Exception {
-        List<Node> listOfNodes = new ArrayList<>();
-        List<Element> listOfElements = new ArrayList<>();
+        listOfNodes = new ArrayList<>();
+        listOfElements = new ArrayList<>();
 
         String section = "";
         String[] splittedLine;

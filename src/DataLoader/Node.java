@@ -5,7 +5,7 @@ public class Node {
     private Point cords;
     private double prop;
 
-    Node(int id, Point cords, double prop) {
+    public Node(int id, Point cords, double prop) {
         this.id = id;
         this.cords = cords;
         this.prop = prop;
