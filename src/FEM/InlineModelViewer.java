@@ -24,7 +24,7 @@ import java.util.List;
 public class InlineModelViewer extends Application {
 
     private static final int VIEWPORT_SIZE = 1000;
-    private static final double MODEL_SCALE_FACTOR = 18000;
+    private static final double MODEL_SCALE_FACTOR = 15000;
     private static final double MODEL_X_OFFSET = 0;
     private static final double MODEL_Y_OFFSET = 0;
     private static final double MODEL_Z_OFFSET = VIEWPORT_SIZE / 2;
@@ -89,6 +89,7 @@ public class InlineModelViewer extends Application {
 		for (Cube cube: cubes) {
 			group.getChildren().add(cube.getMeshView());
 		}
+		group.getChildren().add(new AmbientLight());
 		group.setTranslateX(VIEWPORT_SIZE / 2 + MODEL_X_OFFSET);
 		group.setTranslateY(VIEWPORT_SIZE / 2 * 9.0 / 16 + MODEL_Y_OFFSET);
 		group.setTranslateZ(VIEWPORT_SIZE / 2 + MODEL_Z_OFFSET);
