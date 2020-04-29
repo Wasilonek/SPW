@@ -30,12 +30,12 @@ public class Cube {
 		float[] points = {
 				(float) nodes[0].getCords().getX(), (float) nodes[0].getCords().getY(), (float) nodes[0].getCords().getZ(),    //P0
 				(float) nodes[1].getCords().getX(), (float) nodes[1].getCords().getY(), (float) nodes[1].getCords().getZ(),    //P1
-				(float) nodes[2].getCords().getX(), (float) nodes[2].getCords().getY(), (float) nodes[2].getCords().getZ(),    //P2
-				(float) nodes[3].getCords().getX(), (float) nodes[3].getCords().getY(), (float) nodes[3].getCords().getZ(),    //P3
+				(float) nodes[3].getCords().getX(), (float) nodes[3].getCords().getY(), (float) nodes[3].getCords().getZ(),    //P2
+				(float) nodes[2].getCords().getX(), (float) nodes[2].getCords().getY(), (float) nodes[2].getCords().getZ(),    //P3
 				(float) nodes[4].getCords().getX(), (float) nodes[4].getCords().getY(), (float) nodes[4].getCords().getZ(),    //P4
 				(float) nodes[5].getCords().getX(), (float) nodes[5].getCords().getY(), (float) nodes[5].getCords().getZ(),    //P5
-				(float) nodes[6].getCords().getX(), (float) nodes[6].getCords().getY(), (float) nodes[6].getCords().getZ(),    //P0
 				(float) nodes[7].getCords().getX(), (float) nodes[7].getCords().getY(), (float) nodes[7].getCords().getZ(),    //P0
+				(float) nodes[6].getCords().getX(), (float) nodes[6].getCords().getY(), (float) nodes[6].getCords().getZ(),    //P0
 		};
 
 		float[] texCoords = {
