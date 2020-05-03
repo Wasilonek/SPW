@@ -7,15 +7,18 @@ import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.*;
 import javafx.scene.control.CheckBox;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.CullFace;
 import javafx.scene.shape.DrawMode;
 import javafx.scene.transform.Rotate;
+import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.util.HashMap;
@@ -28,6 +31,12 @@ public class InlineModelViewer extends Application {
     private static final double MODEL_X_OFFSET = 0;
     private static final double MODEL_Y_OFFSET = 0;
     private static final double MODEL_Z_OFFSET = VIEWPORT_SIZE / 2;
+
+	private double mouseOldX, mouseOldY = 0;
+	private Rotate rotateX = new Rotate(0, Rotate.X_AXIS);
+	private Rotate rotateY = new Rotate(0, Rotate.Y_AXIS);
+	private Rotate rotateZ = new Rotate(0, Rotate.Z_AXIS);
+	private PerspectiveCamera camera;
 
     private PhongMaterial texturedMaterial = new PhongMaterial();
 	private Group group;
@@ -121,7 +130,59 @@ public class InlineModelViewer extends Application {
     private SubScene createScene3D(Group group) {
         SubScene scene3d = new SubScene(group, VIEWPORT_SIZE, VIEWPORT_SIZE * 9.0/16, true, SceneAntialiasing.BALANCED);
 		scene3d.setFill(Color.rgb(146, 181, 174));
-		scene3d.setCamera(new PerspectiveCamera());
+//		scene3d.setCamera(new PerspectiveCamera());
+
+		camera = new PerspectiveCamera(false);
+		scene3d.setCamera(camera);
+		camera.setTranslateX(0);
+		camera.setTranslateY(0);
+		camera.setTranslateZ(0);
+		camera.setNearClip(0.1);
+		camera.setFarClip(1000.0);
+
+		camera.getTransforms().addAll(rotateX, rotateY, new Translate(0, 0, 0));
+		group.setRotationAxis(Rotate.Y_AXIS);
+		group.setRotate(200);
+		rotateX.setPivotX(VIEWPORT_SIZE / 2 + MODEL_X_OFFSET);
+		rotateX.setPivotY(VIEWPORT_SIZE / 2 + MODEL_Y_OFFSET);
+		rotateX.setPivotZ(VIEWPORT_SIZE / 2);
+
+		rotateY.setPivotX(VIEWPORT_SIZE / 2 + MODEL_X_OFFSET);
+		rotateY.setPivotY(VIEWPORT_SIZE / 2 + MODEL_Y_OFFSET);
+		rotateY.setPivotZ(VIEWPORT_SIZE / 2);
+
+		rotateZ.setPivotX(VIEWPORT_SIZE / 2 + MODEL_X_OFFSET);
+		rotateZ.setPivotY(VIEWPORT_SIZE / 2 + MODEL_Y_OFFSET);
+		rotateZ.setPivotZ(VIEWPORT_SIZE / 2);
+
+		group.setScaleX(MODEL_SCALE_FACTOR);
+		group.setScaleY(MODEL_SCALE_FACTOR);
+		group.setScaleZ(MODEL_SCALE_FACTOR);
+
+		scene3d.setOnScroll(event -> {
+			double zoomFactor = 1.05;
+			double deltaY = event.getDeltaY();
+			if (deltaY < 0) {
+				zoomFactor = 2.0 - zoomFactor;
+			}
+			group.setScaleX(group.getScaleX() * zoomFactor);
+			group.setScaleY(group.getScaleY() * zoomFactor);
+			group.setScaleZ(group.getScaleZ() * zoomFactor);
+			event.consume();
+		});
+		scene3d.setOnMousePressed(event -> {
+			mouseOldX = event.getSceneX();
+			mouseOldY = event.getSceneY();
+		});
+
+		scene3d.setOnMouseDragged(event -> {
+			rotateX.setAngle(rotateX.getAngle() - (event.getSceneY() - mouseOldY));
+			rotateY.setAngle(rotateY.getAngle() + (event.getSceneX() - mouseOldX));
+			mouseOldX = event.getSceneX();
+			mouseOldY = event.getSceneY();
+
+		});
+
         return scene3d;
     }
 
