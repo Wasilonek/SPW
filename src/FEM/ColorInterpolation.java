@@ -12,35 +12,35 @@ public class ColorInterpolation {
 	private static final float INT_TO_FLOAT_CONST = 1f / 255f;
 	private static final int TEXTURE_SIZE = 16;
 
-	public static Image colorPalette() {
+	public static Image colorPalette(java.awt.Color c0, java.awt.Color c1, java.awt.Color c2, java.awt.Color c3, java.awt.Color c4, java.awt.Color c5, java.awt.Color c6, java.awt.Color c7) {
 		WritableImage img = new WritableImage(TEXTURE_SIZE, TEXTURE_SIZE);
 		PixelWriter pw = img.getPixelWriter();
 
 		//right
 		IntStream.range((int)(0.25* TEXTURE_SIZE), (int)(0.5* TEXTURE_SIZE)).boxed()
 				.forEach(y -> IntStream.range((int)(0* TEXTURE_SIZE), (int)(0.25* TEXTURE_SIZE)).boxed()
-						.forEach(x -> pw.setColor(x, y, getColor(x-(int)(0* TEXTURE_SIZE), y-(int)(0.25* TEXTURE_SIZE), java.awt.Color.RED, java.awt.Color.RED, java.awt.Color.BLUE, java.awt.Color.BLUE))));
+						.forEach(x -> pw.setColor(x, y, getColor(x-(int)(0* TEXTURE_SIZE), y-(int)(0.25* TEXTURE_SIZE), c4, c0, c6, c2))));
 		//top
 		IntStream.range((int)(0* TEXTURE_SIZE), (int)(0.25* TEXTURE_SIZE)).boxed()
 				.forEach(y -> IntStream.range((int)(0.25* TEXTURE_SIZE), (int)(0.5* TEXTURE_SIZE)).boxed()
-						.forEach(x -> pw.setColor(x, y, getColor(x-(int)(0.25* TEXTURE_SIZE), y-(int)(0* TEXTURE_SIZE), java.awt.Color.RED, java.awt.Color.RED, java.awt.Color.RED, java.awt.Color.RED))));
+						.forEach(x -> pw.setColor(x, y, getColor(x-(int)(0.25* TEXTURE_SIZE), y-(int)(0* TEXTURE_SIZE), c4, c5, c0, c1))));
 		//back
 		IntStream.range((int)(0.25* TEXTURE_SIZE), (int)(0.5* TEXTURE_SIZE)).boxed()
 				.forEach(y -> IntStream.range((int)(0.25* TEXTURE_SIZE), (int)(0.5* TEXTURE_SIZE)).boxed()
-						.forEach(x -> pw.setColor(x, y, getColor(x-(int)(0.25* TEXTURE_SIZE), y-(int)(0.25* TEXTURE_SIZE), java.awt.Color.RED, java.awt.Color.RED, java.awt.Color.BLUE, java.awt.Color.BLUE))));
+						.forEach(x -> pw.setColor(x, y, getColor(x-(int)(0.25* TEXTURE_SIZE), y-(int)(0.25* TEXTURE_SIZE), c0, c1, c2, c3))));
 		//left
 		IntStream.range((int)(0.25* TEXTURE_SIZE), (int)(0.5* TEXTURE_SIZE)).boxed()
 				.forEach(y -> IntStream.range((int)(0.5* TEXTURE_SIZE), (int)(0.75* TEXTURE_SIZE)).boxed()
-						.forEach(x -> pw.setColor(x, y, getColor(x-(int)(0.5* TEXTURE_SIZE), y-(int)(0.25* TEXTURE_SIZE), java.awt.Color.RED, java.awt.Color.RED, java.awt.Color.BLUE, java.awt.Color.BLUE))));
+						.forEach(x -> pw.setColor(x, y, getColor(x-(int)(0.5* TEXTURE_SIZE), y-(int)(0.25* TEXTURE_SIZE), c1, c5, c3, c7))));
 		//front
 		IntStream.range((int)(0.25* TEXTURE_SIZE), (int)(0.5* TEXTURE_SIZE)).boxed()
 				.forEach(y -> IntStream.range((int)(0.75* TEXTURE_SIZE), (int)(1* TEXTURE_SIZE)).boxed()
-						.forEach(x -> pw.setColor(x, y, getColor(x-(int)(0.75* TEXTURE_SIZE), y-(int)(0.25* TEXTURE_SIZE), java.awt.Color.RED, java.awt.Color.RED, java.awt.Color.BLUE, java.awt.Color.BLUE))));
+						.forEach(x -> pw.setColor(x, y, getColor(x-(int)(0.75* TEXTURE_SIZE), y-(int)(0.25* TEXTURE_SIZE), c5, c4, c7, c6))));
 
 		//down
 		IntStream.range((int)(0.5* TEXTURE_SIZE), (int)(0.75* TEXTURE_SIZE)).boxed()
 				.forEach(y -> IntStream.range((int)(0.25* TEXTURE_SIZE), (int)(0.5* TEXTURE_SIZE)).boxed()
-						.forEach(x -> pw.setColor(x, y, getColor(x-(int)(0.25* TEXTURE_SIZE), y-(int)(0.5* TEXTURE_SIZE), java.awt.Color.BLUE, java.awt.Color.BLUE, java.awt.Color.BLUE, java.awt.Color.BLUE))));
+						.forEach(x -> pw.setColor(x, y, getColor(x-(int)(0.25* TEXTURE_SIZE), y-(int)(0.5* TEXTURE_SIZE), c2, c3, c6, c7))));
 
 		// save for testing purposes
 //		try {
@@ -51,7 +51,7 @@ public class ColorInterpolation {
 		return img;
 	}
 
-	private static java.awt.Color interpolateColor(final java.awt.Color COLOR1, final java.awt.Color COLOR2, float fraction)
+	public static java.awt.Color interpolateColor(final java.awt.Color COLOR1, final java.awt.Color COLOR2, float fraction)
 	{
 		fraction = Math.min(fraction, 1f);
 		fraction = Math.max(fraction, 0f);

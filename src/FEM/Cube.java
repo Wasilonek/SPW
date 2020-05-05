@@ -18,6 +18,10 @@ public class Cube {
 		createCube();
 	}
 
+	public Node[] getNodes() {
+		return nodes;
+	}
+
 	public TriangleMesh getMesh() {
 		return mesh;
 	}
