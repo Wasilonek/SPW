@@ -1,10 +1,14 @@
 package FEM;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 import java.util.stream.IntStream;
 
 public class ColorInterpolation {
