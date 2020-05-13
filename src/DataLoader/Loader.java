@@ -19,7 +19,7 @@ public class Loader {
 
     public String getFileName() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(new File("./src/FilesWithData"));
+        fileChooser.setInitialDirectory(new File("./"));
 
         File selectedFile = fileChooser.showOpenDialog(null);
 
